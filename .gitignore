@@ -1,0 +1,8 @@
+.DS_Store
+*.pyc
+__pycache__/
+update_*.py
+parse_laparet*.py
+fix_css.py
+laparet_cat.html
+laparet_collection.html

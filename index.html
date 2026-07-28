@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laparet Великий Новгород — Премиальная Плитка, Керамогранит и Ламинат</title>
+    <meta name="description" content="Официальный фирменный магазин Laparet в Великом Новгороде: ул. Ломоносова, д. 20, к. 1. Керамическая плитка, керамогранит, SPC-ламинат. Бесплатный 3D-VR проект, калькулятор и доставка.">
+
+    <!-- Fonts: Outfit & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
+
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Custom Cursor (desktop only) -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- 152-ФЗ Cookie Banner -->
+    <div id="cookieNotice" class="cookie-banner hidden">
+        <div class="cookie-content">
+            <i class="ph-bold ph-cookie"></i>
+            <span>Пользуясь сайтом, вы принимаете политику обработки персональных данных согласно <a href="#privacy" onclick="openPrivacyModal(event)">152-ФЗ РФ</a>.</span>
+        </div>
+        <button class="btn btn-sm btn-primary" onclick="acceptCookies()">Принять</button>
+    </div>
+
+    <!-- Global Video Background Layer -->
+    <!-- ═══════════════════════════════════════════════════════════════
+         LAPARET HERO SECTION
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="hero-section portfolio-hero" id="hero">
+        <div class="video-container" id="globalVideoContainer">
+            <video id="heroVideo" autoplay muted loop playsinline>
+                <source src="hero_video_looped.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay portfolio-overlay"></div>
+        </div>
+
+        <!-- Navbar -->
+        <header class="navbar portfolio-navbar">
+            <a href="#" class="logo">
+                <i class="ph-bold ph-cube-transparent logo-icon"></i>
+                <div class="logo-brand">
+                    <span class="logo-title">LAPARET</span>
+                </div>
+            </a>
+
+            <nav class="nav-links">
+                <a href="#collections" class="nav-link active">Коллекции</a>
+                <a href="#catalog" class="nav-link">Каталог</a>
+                <a href="#calculator" class="nav-link">Калькулятор</a>
+                <a href="#design-3d" class="nav-link">3D Дизайн</a>
+                <a href="#showroom" class="nav-link">Контакты</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="btn btn-outline nav-cta-btn">
+                    <span>КОНСУЛЬТАЦИЯ</span>
+                </button>
+                <button class="mobile-menu-toggle" aria-label="Меню">
+                    <i class="ph-bold ph-list"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Hero Center Content -->
+        <div class="hero-content portfolio-content">
+            <div class="text-wrapper">
+                <div class="greeting animate-fade-up" style="animation-delay: 0.1s;">
+                    ОФИЦИАЛЬНЫЙ ДИЛЕР
+                </div>
+
+                <h1 class="main-title animate-fade-up" style="animation-delay: 0.2s;">
+                    LAPARET<br>
+                    Великий Новгород
+                </h1>
+
+                <h2 class="sub-title portfolio-subtitle accent-text-gradient animate-fade-up" style="animation-delay: 0.3s;">
+                    Премиальный керамогранит и керамическая плитка
+                </h2>
+
+                <div class="cta-group portfolio-cta-group animate-fade-up" style="animation-delay: 0.5s;">
+                    <a href="#catalog" class="btn btn-primary portfolio-btn">
+                        <span>СМОТРЕТЬ КАТАЛОГ</span>
+                    </a>
+                    <a href="#showroom" class="btn btn-outline portfolio-btn-outline">
+                        <span>ПОСЕТИТЬ ШОУРУМ</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hero Footer -->
+        <div class="hero-footer portfolio-footer">
+            <div class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+            </div>
+
+            <div class="glassmorphism-panel availability-card animate-fade-up" style="animation-delay: 0.6s;">
+                <div class="availability-header">
+                    <div class="status-indicator">
+                        <div class="pulse-dot"></div>
+                    </div>
+                    <span>Шоурум открыт</span>
+                </div>
+                <p>Ждем вас по адресу: ул. Державина, 15.<br>Ежедневно с 10:00 до 20:00.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         FEATURES — Asymmetric Bento Grid (not 4 equal cards)
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="features-section" id="collections">
+        <div class="container">
+            <div class="features-bento">
+                <div class="bento-card bento-large glassmorphism-panel" data-reveal>
+                    <div class="bento-visual">
+                        <img src="assets/images/3d_bathroom_showcase_1784936213050.jpg" alt="3D-VR проект ванной комнаты Laparet" loading="lazy">
+                    </div>
+                    <div class="bento-body">
+                        <div class="bento-icon"><i class="ph-duotone ph-cube"></i></div>
+                        <h3>Бесплатный 3D-VR Проект</h3>
+                        <p>Создадим точную 3D-модель вашей ванной или кухни за 15 минут в нашем салоне. Увидите итог до покупки.</p>
+                    </div>
+                </div>
+
+                <div class="bento-card bento-small glassmorphism-panel" data-reveal>
+                    <div class="bento-icon"><i class="ph-duotone ph-truck"></i></div>
+                    <h3>Доставка & Подъем</h3>
+                    <p>Быстрая доставка по Великому Новгороду и области с аккуратным подъемом в квартиру.</p>
+                </div>
+
+                <div class="bento-card bento-small glassmorphism-panel" data-reveal>
+                    <div class="bento-icon"><i class="ph-duotone ph-calculator"></i></div>
+                    <h3>Точный Расчет</h3>
+                    <p>Рассчитаем объем материалов с запасом на подрезку без переплат.</p>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         CATALOG — Filters + Product Grid
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="catalog-section" id="catalog">
+        <div class="container">
+            <div class="catalog-header">
+                <div>
+                    <h2 class="section-title" data-reveal>Каталог материалов</h2>
+                    <p class="catalog-lead" data-reveal>Керамогранит, плитка и SPC-ламинат из коллекций Laparet</p>
+                </div>
+                <div class="catalog-counter" id="catalogCounter" data-reveal>Загрузка товаров...</div>
+            </div>
+
+            <!-- Filter Controls -->
+            <div class="filter-wrapper" data-reveal>
+                <div class="category-pills">
+                    <button class="pill-btn active" data-category="all" onclick="filterCategory('all', this)">Все</button>
+                    <button class="pill-btn" data-category="keramogranit" onclick="filterCategory('keramogranit', this)">Керамогранит</button>
+                    <button class="pill-btn" data-category="plitka" onclick="filterCategory('plitka', this)">Настенная плитка</button>
+                    <button class="pill-btn" data-category="laminat" onclick="filterCategory('laminat', this)">SPC-Ламинат</button>
+                </div>
+
+                <div class="subfilter-row glassmorphism-panel">
+                    <div class="filter-item">
+                        <label for="textureFilter">Фактура</label>
+                        <select id="textureFilter" class="filter-select" onchange="applyFilters()">
+                            <option value="all">Все</option>
+                            <option value="mramor">Мрамор</option>
+                            <option value="onyx">Оникс</option>
+                            <option value="derevo">Дерево</option>
+                            <option value="beton">Бетон / Травертин</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label for="surfaceFilter">Поверхность</label>
+                        <select id="surfaceFilter" class="filter-select" onchange="applyFilters()">
+                            <option value="all">Все</option>
+                            <option value="polirovannaya">Полированная</option>
+                            <option value="matovaya">Матовая</option>
+                            <option value="glyantsevaya">Глянцевая</option>
+                            <option value="lappatirovannaya">Лаппатированная</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label for="roomFilter">Помещение</label>
+                        <select id="roomFilter" class="filter-select" onchange="applyFilters()">
+                            <option value="all">Все</option>
+                            <option value="vannaya">Ванная</option>
+                            <option value="kukhnya">Кухня</option>
+                            <option value="gostinaya">Гостиная</option>
+                        </select>
+                    </div>
+                    <div class="filter-item sort-item">
+                        <label for="sortOrder">Сортировка</label>
+                        <select id="sortOrder" class="filter-select" onchange="applyFilters()">
+                            <option value="popular">По популярности</option>
+                            <option value="price-asc">Сначала дешевле</option>
+                            <option value="price-desc">Сначала дороже</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="product-grid" id="productGrid"></div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         CALCULATOR — Split Layout
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="calculator-section" id="calculator">
+        <div class="container">
+            <div class="calculator-grid">
+                <div class="calc-info" data-reveal>
+                    <span class="section-eyebrow">ИНЖЕНЕРНЫЙ РАСЧЕТ</span>
+                    <h2 class="section-title">Калькулятор расчёта<br>плитки и ламината</h2>
+                    <p class="calc-desc">
+                        Укажите габариты помещения. Калькулятор пересчитает площадь в коробки и выведет точную стоимость с учётом подрезки.
+                    </p>
+                    <div class="calc-bullets">
+                        <div class="calc-bullet"><i class="ph-bold ph-check-circle"></i><span>Точный пересчет м² в коробки</span></div>
+                        <div class="calc-bullet"><i class="ph-bold ph-check-circle"></i><span>Выбор запаса на подрезку</span></div>
+                        <div class="calc-bullet"><i class="ph-bold ph-check-circle"></i><span>Мгновенный расчёт бюджета</span></div>
+                    </div>
+                </div>
+
+                <div class="calculator-card glassmorphism-panel" data-reveal>
+                    <h3>Параметры помещения</h3>
+                    <div class="form-group">
+                        <label for="calcProductSelect">Коллекция Laparet</label>
+                        <select id="calcProductSelect" class="form-control" onchange="recalculateTile()"></select>
+                    </div>
+                    <div class="calc-inputs">
+                        <div class="form-group">
+                            <label for="calcWidth">Ширина (м)</label>
+                            <input type="number" id="calcWidth" class="form-control" value="3.5" step="0.1" min="0.5" oninput="recalculateTile()">
+                        </div>
+                        <div class="form-group">
+                            <label for="calcLength">Длина / Высота (м)</label>
+                            <input type="number" id="calcLength" class="form-control" value="2.8" step="0.1" min="0.5" oninput="recalculateTile()">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Запас на подрезку</label>
+                        <div class="reserve-pills">
+                            <button class="reserve-btn" data-reserve="5" onclick="setReserve(5, this)">+5%</button>
+                            <button class="reserve-btn active" data-reserve="10" onclick="setReserve(10, this)">+10%</button>
+                            <button class="reserve-btn" data-reserve="15" onclick="setReserve(15, this)">+15%</button>
+                        </div>
+                    </div>
+                    <div class="calc-divider"></div>
+                    <div class="calc-results">
+                        <div class="res-row"><span>Чистая площадь</span><strong id="resNetArea">9.80 м²</strong></div>
+                        <div class="res-row"><span>С запасом</span><strong id="resGrossArea">10.78 м²</strong></div>
+                        <div class="res-row"><span>Коробки</span><strong id="resBoxes">8 шт.</strong></div>
+                        <div class="res-row total-row"><span>Итого</span><span class="total-price" id="resTotalPrice">33 408 ₽</span></div>
+                    </div>
+                    <button class="btn btn-primary btn-block" style="margin-top:1.5rem;" onclick="sendCalculationToCart()">
+                        <i class="ph-bold ph-shopping-bag"></i>
+                        <span>ДОБАВИТЬ В ЗАКАЗ</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         3D VR DESIGN — Full-Width Showcase
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="design-3d-section" id="design-3d">
+        <div class="container">
+            <div class="design-showcase glassmorphism-panel" data-reveal>
+                <div class="showcase-img-wrapper">
+                    <img src="assets/images/3d_bathroom_showcase_1784936213050.jpg" alt="Laparet 3D VR Bathroom Render" class="showcase-img" loading="lazy">
+                    <div class="showcase-badge">
+                        <i class="ph-bold ph-cube"></i>
+                        <span>3D VR · Бесплатно</span>
+                    </div>
+                </div>
+                <div class="showcase-form-wrapper">
+                    <h2 class="section-title">Увидьте интерьер<br>до покупки плитки</h2>
+                    <p class="showcase-desc">
+                        Приходите в салон на ул. Ломоносова 20 к.1. Дизайнер подготовит реалистичную 3D-модель и раскладку плитки бесплатно.
+                    </p>
+                    <form id="designForm" class="design-form" onsubmit="handleDesignSubmit(event)">
+                        <div class="form-group">
+                            <label for="dName">Ваше имя</label>
+                            <input type="text" id="dName" class="form-control" placeholder="Александр" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dPhone">Контактный телефон</label>
+                            <input type="tel" id="dPhone" class="form-control" placeholder="+7 (999) 000-00-00" required>
+                        </div>
+                        <div class="form-checkbox-group">
+                            <input type="checkbox" id="dAgreement" required checked>
+                            <label for="dAgreement">Даю согласие на обработку персональных данных (<a href="#privacy" onclick="openPrivacyModal(event)">152-ФЗ РФ</a>).</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i class="ph-bold ph-calendar-check"></i>
+                            <span>ЗАПИСАТЬСЯ НА 3D-ПРОЕКТ</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SHOWROOM & CONTACTS
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="showroom-section" id="showroom">
+        <div class="container">
+            <div class="showroom-grid">
+                <div class="showroom-card glassmorphism-panel" data-reveal>
+                    <div class="showroom-head">
+                        <i class="ph-bold ph-storefront icon-store"></i>
+                        <div>
+                            <h3>Магазин Laparet</h3>
+                            <p class="store-code">Великий Новгород · Код ТТ 13501</p>
+                        </div>
+                    </div>
+                    <div class="showroom-details">
+                        <div class="detail-row">
+                            <i class="ph-bold ph-map-pin"></i>
+                            <div>
+                                <strong>Адрес</strong>
+                                <span>Новгородская обл., г. Великий Новгород, ул. Ломоносова, д. 20, к. 1</span>
+                            </div>
+                        </div>
+                        <div class="detail-row">
+                            <i class="ph-bold ph-clock"></i>
+                            <div>
+                                <strong>Режим работы</strong>
+                                <span>Пн–Пт: 10:00–20:00 | Сб–Вс: 10:00–18:00</span>
+                            </div>
+                        </div>
+                        <div class="detail-row">
+                            <i class="ph-bold ph-phone"></i>
+                            <div>
+                                <strong>Телефон</strong>
+                                <a href="tel:88005507899" class="phone-link">8 (800) 550-78-99</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="showroom-buttons">
+                        <a href="https://wa.me/78005507899" target="_blank" class="btn btn-outline btn-block">
+                            <i class="ph-bold ph-whatsapp-logo"></i>
+                            <span>WHATSAPP</span>
+                        </a>
+                        <button class="btn btn-primary btn-block" onclick="openConsultationModal()">
+                            <i class="ph-bold ph-phone-call"></i>
+                            <span>ЗАКАЗАТЬ ЗВОНОК</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="map-card glassmorphism-panel" id="contacts" data-reveal>
+                    <div class="map-tag">
+                        <i class="ph-bold ph-navigation-arrow"></i>
+                        <span>Великий Новгород, ул. Ломоносова 20 к.1</span>
+                    </div>
+                    <iframe src="https://yandex.ru/map-widget/v1/?ll=31.246400%2C58.535000&z=16&pt=31.246400,58.535000,pm2rdm" width="100%" height="100%" frameborder="0" allowfullscreen="true" style="border:0; filter: invert(90%) hue-rotate(180deg) contrast(120%); border-radius: 16px;" loading="lazy" title="Карта Laparet Великий Новгород"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         FOOTER
+         ═══════════════════════════════════════════════════════════════ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand-col">
+                    <a href="#" class="logo">
+                        <i class="ph-bold ph-cube-transparent logo-icon"></i>
+                        <div class="logo-brand">
+                            <span class="logo-title">LAPARET</span>
+                            <span class="logo-sub">ВЕЛИКИЙ НОВГОРОД</span>
+                        </div>
+                    </a>
+                    <p class="footer-desc">Официальный магазин Laparet в Великом Новгороде. Керамическая плитка, керамогранит, SPC-ламинат и сантехника с гарантией завода.</p>
+                </div>
+                <div class="footer-nav-col">
+                    <h4>Каталог</h4>
+                    <a href="#catalog">Керамогранит</a>
+                    <a href="#catalog">Настенная плитка</a>
+                    <a href="#catalog">SPC-Ламинат</a>
+                </div>
+                <div class="footer-nav-col">
+                    <h4>Сервисы</h4>
+                    <a href="#design-3d">3D-VR проект</a>
+                    <a href="#calculator">Калькулятор</a>
+                    <a href="#showroom">Доставка</a>
+                </div>
+                <div class="footer-contact-col">
+                    <h4>Салон</h4>
+                    <p>ул. Ломоносова 20 к.1</p>
+                    <p>Пн–Пт 10:00–20:00, Сб–Вс 10:00–18:00</p>
+                    <a href="tel:88005507899" class="footer-phone">8 (800) 550-78-99</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Laparet Великий Новгород. Все права защищены.</p>
+                <a href="#privacy" onclick="openPrivacyModal(event)">Политика конфиденциальности (152-ФЗ)</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         OVERLAYS: Cart Drawer, Consultation Modal, Privacy Modal
+         ═══════════════════════════════════════════════════════════════ -->
+
+    <!-- Cart Drawer -->
+    <div class="cart-drawer-overlay hidden" id="cartDrawerOverlay" onclick="closeCartDrawer(event)">
+        <div class="cart-drawer" onclick="event.stopPropagation()">
+            <div class="cart-drawer-header">
+                <h3><i class="ph-bold ph-shopping-bag"></i> Ваш Заказ</h3>
+                <button class="close-btn" onclick="closeCartDrawer()" aria-label="Закрыть">&times;</button>
+            </div>
+            <div class="cart-drawer-body" id="cartDrawerBody"></div>
+            <div class="cart-drawer-footer">
+                <div class="cart-total-row">
+                    <span>Итого к оплате:</span>
+                    <strong id="cartTotalSum">0 ₽</strong>
+                </div>
+                <form id="cartCheckoutForm" onsubmit="handleCartCheckout(event)">
+                    <div class="form-group"><input type="text" id="cName" class="form-control" placeholder="Ваше имя" required></div>
+                    <div class="form-group"><input type="tel" id="cPhone" class="form-control" placeholder="Ваш телефон" required></div>
+                    <div class="form-checkbox-group">
+                        <input type="checkbox" id="cAgreement" required checked>
+                        <label for="cAgreement">Согласен на обработку персональных данных (<a href="#privacy" onclick="openPrivacyModal(event)">152-ФЗ</a>).</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg">
+                        <span>ОТПРАВИТЬ ЗАКАЗ</span>
+                        <i class="ph-bold ph-paper-plane-right"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Consultation Modal -->
+    <div class="modal-overlay hidden" id="consultationModal" onclick="closeConsultationModal(event)">
+        <div class="modal-card glassmorphism-panel" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeConsultationModal()" aria-label="Закрыть">&times;</button>
+            <div class="modal-header">
+                <i class="ph-bold ph-phone-call modal-icon"></i>
+                <h3>Заказать консультацию</h3>
+                <p>Менеджер салона свяжется в течение 10 минут.</p>
+            </div>
+            <form id="consultationForm" onsubmit="handleConsultationSubmit(event)">
+                <div class="form-group">
+                    <label for="conName">Ваше имя</label>
+                    <input type="text" id="conName" class="form-control" placeholder="Иван" required>
+                </div>
+                <div class="form-group">
+                    <label for="conPhone">Ваш телефон</label>
+                    <input type="tel" id="conPhone" class="form-control" placeholder="+7 (999) 000-00-00" required>
+                </div>
+                <div class="form-checkbox-group">
+                    <input type="checkbox" id="conAgreement" required checked>
+                    <label for="conAgreement">Даю согласие на обработку персональных данных (<a href="#privacy" onclick="openPrivacyModal(event)">152-ФЗ</a>).</label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block"><span>ЗАКАЗАТЬ ЗВОНОК</span></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Modal (152-ФЗ) -->
+    <div class="modal-overlay hidden" id="privacyModal" onclick="closePrivacyModal(event)">
+        <div class="modal-card glassmorphism-panel privacy-card" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closePrivacyModal()" aria-label="Закрыть">&times;</button>
+            <h3>Политика конфиденциальности (ФЗ-152 РФ)</h3>
+            <div class="privacy-body">
+                <p><strong>1. Общие положения</strong><br>Политика обработки персональных данных составлена в соответствии с ФЗ-152 «О персональных данных» для филиала Laparet в г. Великий Новгород (ул. Ломоносова, д. 20, к. 1).</p>
+                <p><strong>2. Собираемые данные</strong><br>Имя, телефон, адрес доставки в Великом Новгороде и параметры 3D-проекта раскладки плитки.</p>
+                <p><strong>3. Цели обработки</strong><br>Персональные данные используются исключительно для связи с клиентом, консультации и проведения 3D-проектирования.</p>
+            </div>
+            <button class="btn btn-outline btn-block" style="margin-top:1.5rem;" onclick="closePrivacyModal()">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- JS Application Engine -->
+    <script src="app.js"></script>
+</body>
+</html>
