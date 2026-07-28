@@ -1,0 +1,25 @@
+[main 453a55e] Add generated images and artifacts to docs
+ Committer: macbook 13 pro <macbook13pro@MacBook-Pro-macbook.local>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 8 files changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 docs/3d_bathroom_showcase_1784936213050.jpg
+ create mode 100644 docs/calacatta_marble_tile_1784936188089.jpg
+ create mode 100644 docs/concrete_travertine_tile_1784936486162.jpg
+ create mode 100644 docs/hero_tile_bg_1784936174808.jpg
+ create mode 100644 docs/media__1784936771499.png
+ create mode 100644 docs/media__1784941582181.jpg
+ create mode 100644 docs/onyx_emerald_tile_1784936199442.jpg
+ create mode 100644 docs/spc_wood_laminate_1784936474007.jpg
+To github.com:ossiris11/laporet.git
+   ea1268e..453a55e  main -> main
