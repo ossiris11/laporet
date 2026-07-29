@@ -78,7 +78,10 @@
     box-sizing: border-box;
 }
 
-html { scroll-behavior: smooth; }
+html { 
+    scroll-behavior: smooth; 
+    background-color: #0a0908; /* Absolutely essential to prevent white flash/grey mix */
+}
 
 body {
     /* Base background is moved to body::before to fix z-index stacking */
@@ -1489,22 +1492,18 @@ body:hover .cursor-ring { opacity: 1; }
 body::before, body::after {
     content: '';
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1;
+    top: 0; left: 0; width: 100vw; height: 100vh;
     pointer-events: none;
-    opacity: 0.6;
+    z-index: 0;
 }
 
 body::before {
-    background: radial-gradient(circle at 0% 0%, rgba(198, 166, 123, 0.25) 0%, transparent 60%), #1a1817;
+    background: radial-gradient(circle at 0% 0%, rgba(198, 166, 123, 0.15) 0%, transparent 60%);
     animation: floatOrb 20s ease-in-out infinite alternate;
 }
 
 body::after {
-    background: radial-gradient(circle at 100% 100%, rgba(100, 120, 140, 0.15) 0%, rgba(154, 123, 84, 0.15) 40%, transparent 70%);
+    background: radial-gradient(circle at 100% 100%, rgba(100, 120, 140, 0.1) 0%, rgba(154, 123, 84, 0.1) 40%, transparent 70%);
     animation: floatOrb2 25s ease-in-out infinite alternate;
 }
 
