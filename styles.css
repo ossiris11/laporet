@@ -81,9 +81,12 @@
 html { scroll-behavior: smooth; }
 
 body {
-    background: linear-gradient(135deg, #0a0a0c, #16161a, #0a0a0c);
-    background-size: 300% 300%;
-    animation: premiumBgShift 20s ease infinite;
+    background: radial-gradient(circle at 15% 50%, rgba(198, 166, 123, 0.07), transparent 40%),
+                radial-gradient(circle at 85% 30%, rgba(154, 123, 84, 0.04), transparent 50%),
+                linear-gradient(135deg, #0a0a0c 0%, #171514 50%, #0a0a0c 100%);
+    background-size: 200% 200%;
+    animation: premiumBgShift 25s ease-in-out infinite alternate;
+    background-attachment: fixed;
     
     color: var(--text-primary);
     font-family: var(--font-body);
@@ -557,7 +560,7 @@ body:hover .cursor-ring { opacity: 1; }
 .bento-large .bento-body {
     background: linear-gradient(135deg, #0a0a0c, #16161a, #0a0a0c);
     background-size: 300% 300%;
-    animation: premiumBgShift 20s ease infinite; padding: var(--space-xl); flex: 1; }
+    padding: var(--space-xl); flex: 1; }
 
 .bento-small { }
 .bento-wide { grid-column: 2 / 3; }
@@ -1082,7 +1085,7 @@ body:hover .cursor-ring { opacity: 1; }
 .cart-drawer-body {
     background: linear-gradient(135deg, #0a0a0c, #16161a, #0a0a0c);
     background-size: 300% 300%;
-    animation: premiumBgShift 20s ease infinite; flex: 1; overflow-y: auto; padding: var(--space-md) var(--space-xl); }
+    flex: 1; overflow-y: auto; padding: var(--space-md) var(--space-xl); }
 
 .cart-item {
     display: flex; align-items: center; gap: var(--space-md);
@@ -1479,4 +1482,10 @@ body:hover .cursor-ring { opacity: 1; }
 .video-container {
     will-change: transform, filter, opacity;
     transform: translateZ(0);
+}
+
+@keyframes premiumBgShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
