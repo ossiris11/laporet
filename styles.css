@@ -81,10 +81,9 @@
 html { scroll-behavior: smooth; }
 
 body {
-    background-color: #1a1817; /* Base warm dark tone, NOT pure black */
+    /* Base background is moved to body::before to fix z-index stacking */
     position: relative;
     z-index: 0;
-    
     color: var(--text-primary);
     font-family: var(--font-body);
     font-size: 1rem;
@@ -1500,7 +1499,7 @@ body::before, body::after {
 }
 
 body::before {
-    background: radial-gradient(circle at 0% 0%, rgba(198, 166, 123, 0.25) 0%, transparent 60%);
+    background: radial-gradient(circle at 0% 0%, rgba(198, 166, 123, 0.25) 0%, transparent 60%), #1a1817;
     animation: floatOrb 20s ease-in-out infinite alternate;
 }
 
