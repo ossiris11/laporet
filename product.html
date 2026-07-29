@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laparet Premium — Товар</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .pdp-container {
+            padding-top: 120px;
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding-left: var(--space-xl);
+            padding-right: var(--space-xl);
+        }
+        
+        /* Gallery */
+        .pdp-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .pdp-main-img-container {
+            width: 100%;
+            height: 70vh;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            background: rgba(255,255,255,0.02);
+            position: relative;
+        }
+        
+        .pdp-main-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .pdp-main-img:hover {
+            transform: scale(1.05);
+        }
+        
+        .pdp-thumbnails {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        
+        .pdp-thumb {
+            width: 120px;
+            height: 90px;
+            border-radius: var(--radius-sm);
+            object-fit: cover;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: var(--transition-fast);
+            border: 2px solid transparent;
+        }
+        
+        .pdp-thumb:hover, .pdp-thumb.active {
+            opacity: 1;
+            border-color: var(--accent);
+        }
+        
+        /* Info */
+        .pdp-info {
+            position: sticky;
+            top: 120px;
+            height: fit-content;
+            padding-bottom: 2rem;
+        }
+        
+        .pdp-breadcrumbs {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .pdp-breadcrumbs a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .pdp-breadcrumbs a:hover { color: var(--accent); }
+        
+        .pdp-title {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.1;
+        }
+        
+        .pdp-sku {
+            font-family: var(--font-body);
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+        
+        .pdp-price {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+        }
+        
+        .pdp-specs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            background: rgba(255,255,255,0.02);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .spec-item {
+            display: flex;
+            flex-direction: column;
+        }
+        .spec-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .spec-value {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        
+        .pdp-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .pdp-actions .btn {
+            flex: 1;
+            padding: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .pdp-description {
+            line-height: 1.8;
+            color: var(--text-secondary);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+        }
+        
+        /* Loading overlay */
+        #pdpLoader {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: var(--bg-dark);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--accent);
+            transition: opacity 0.5s ease;
+        }
+        
+        @media(max-width: 1024px) {
+            .pdp-container { grid-template-columns: 1fr; }
+            .pdp-info { position: static; }
+            .pdp-main-img-container { height: 50vh; }
+        }
+    </style>
+</head>
+<body class="light-mode">
+
+    <div id="pdpLoader">ЗАГРУЗКА...</div>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-brand">LAPARET <span style="font-family: var(--font-body); font-weight: 300; letter-spacing: 2px;">PREMIUM</span></div>
+        <div class="nav-links">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="catalog.html">КАТАЛОГ</a>
+            <a href="index.html#3d">3D ДИЗАЙН</a>
+            <a href="index.html#showroom">ШОУРУМ</a>
+        </div>
+        <button class="nav-cta" onclick="toggleCart()">Корзина (0)</button>
+    </nav>
+
+    <div class="pdp-container" id="pdpContainer" style="opacity: 0; transition: opacity 0.5s ease;">
+        
+        <div class="pdp-gallery">
+            <div class="pdp-main-img-container">
+                <img src="" alt="" class="pdp-main-img" id="mainImg">
+            </div>
+            <div class="pdp-thumbnails" id="thumbnailsContainer">
+                <!-- Thumbs will be injected here -->
+            </div>
+        </div>
+        
+        <div class="pdp-info">
+            <div class="pdp-breadcrumbs">
+                <a href="index.html">Главная</a> / 
+                <a href="catalog.html">Каталог</a> / 
+                <span id="bcName">Коллекция</span>
+            </div>
+            
+            <h1 class="pdp-title section-title" id="productTitle">Название коллекции</h1>
+            <div class="pdp-sku" id="productSku">Артикул: -</div>
+            
+            <div class="pdp-price" id="productPrice">0 ₽/м²</div>
+            
+            <div class="pdp-specs">
+                <div class="spec-item">
+                    <span class="spec-label">Категория</span>
+                    <span class="spec-value" id="specCat">-</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Фактура</span>
+                    <span class="spec-value" id="specTex">-</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Размер</span>
+                    <span class="spec-value" id="specSize">60x60 см</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Поверхность</span>
+                    <span class="spec-value" id="specSurface">Матовая</span>
+                </div>
+            </div>
+            
+            <div class="pdp-actions">
+                <button class="btn btn-primary" style="flex: 2;">ДОБАВИТЬ В КОРЗИНУ</button>
+                <button class="btn btn-outline" style="flex: 1;" onclick="window.location.href='index.html#3d'">В 3D ПРОЕКТ</button>
+            </div>
+            
+            <div class="pdp-description">
+                <p>Премиальная коллекция от Laparet. Идеальное сочетание стиля и долговечности. Данный материал отлично подходит как для жилых, так и для коммерческих помещений, создавая атмосферу роскоши и уюта.</p>
+                <p style="margin-top: 1rem;">Высокая износостойкость, легкая очистка и идеальная геометрия краев для бесшовной укладки.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Mock data logic for advanced filters
+        const SURFACES = ['Матовая', 'Полированная', 'Глянцевая', 'Лаппатированная'];
+        const SIZES = ['60x60', '120x60', '80x80', '20x120'];
+        
+        function getHashNum(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) hash = str.charCodeAt(i) + ((hash << 5) - hash);
+            return Math.abs(hash);
+        }
+
+        async function loadProduct() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+            
+            if (!productId) {
+                window.location.href = 'catalog.html';
+                return;
+            }
+            
+            try {
+                const res = await fetch('catalog_full.json');
+                const products = await res.json();
+                
+                const product = products.find(p => p.id === productId);
+                
+                if (!product) {
+                    alert('Товар не найден!');
+                    window.location.href = 'catalog.html';
+                    return;
+                }
+                
+                // Hydrate missing attributes for demonstration deterministically based on ID
+                const hash = getHashNum(product.id);
+                product.surface = SURFACES[hash % SURFACES.length];
+                product.size = SIZES[hash % SIZES.length];
+                // Random price between 2000 and 8000 based on hash
+                product.price = 2000 + (hash % 60) * 100; 
+                
+                renderProduct(product);
+                
+            } catch (e) {
+                console.error("Ошибка:", e);
+                alert('Ошибка загрузки данных');
+            }
+        }
+        
+        function renderProduct(product) {
+            document.title = `Laparet Premium — ${product.name}`;
+            document.getElementById('bcName').innerText = product.name;
+            document.getElementById('productTitle').innerText = product.name;
+            document.getElementById('productSku').innerText = `Артикул: LP-${product.id.substring(0,6).toUpperCase()}`;
+            document.getElementById('productPrice').innerText = `${product.price} ₽/м²`;
+            
+            document.getElementById('specCat').innerText = product.category === 'keramogranit' ? 'Керамогранит' : (product.category === 'plitka' ? 'Керамическая плитка' : 'Ламинат SPC');
+            document.getElementById('specTex').innerText = product.texture.charAt(0).toUpperCase() + product.texture.slice(1);
+            document.getElementById('specSize').innerText = product.size;
+            document.getElementById('specSurface').innerText = product.surface;
+            
+            // Gallery
+            const mainImg = document.getElementById('mainImg');
+            const thumbsContainer = document.getElementById('thumbnailsContainer');
+            
+            const images = (product.images && product.images.length > 0) ? product.images : ['assets/images/hero_tile_bg_1784936174808.jpg'];
+            mainImg.src = images[0];
+            
+            images.forEach((imgSrc, index) => {
+                const img = document.createElement('img');
+                img.src = imgSrc;
+                img.className = 'pdp-thumb' + (index === 0 ? ' active' : '');
+                img.onclick = () => {
+                    mainImg.src = imgSrc;
+                    document.querySelectorAll('.pdp-thumb').forEach(t => t.classList.remove('active'));
+                    img.classList.add('active');
+                };
+                thumbsContainer.appendChild(img);
+            });
+            
+            // Show page
+            document.getElementById('pdpLoader').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('pdpLoader').style.display = 'none';
+                document.getElementById('pdpContainer').style.opacity = '1';
+            }, 500);
+        }
+        
+        document.addEventListener('DOMContentLoaded', loadProduct);
+    </script>
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laparet Premium — Полный каталог</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .catalog-page-container {
+            display: flex;
+            padding-top: 100px;
+            min-height: 100vh;
+        }
+        
+        .filters-sidebar {
+            width: 300px;
+            padding: var(--space-xl);
+            background: rgba(12, 12, 14, 0.8);
+            border-right: 1px solid rgba(255,255,255,0.05);
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        
+        .filter-group {
+            margin-bottom: var(--space-xl);
+        }
+        
+        .filter-title {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-bottom: var(--space-md);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 0.5rem;
+        }
+        
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+        
+        .filter-option:hover {
+            color: var(--accent);
+        }
+        
+        .filter-checkbox {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 4px;
+            background: transparent;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .filter-checkbox:checked {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+        
+        .catalog-main {
+            flex: 1;
+            padding: var(--space-xl);
+        }
+        
+        .catalog-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .catalog-title {
+            font-size: 3rem;
+        }
+        
+        .catalog-count {
+            color: var(--text-secondary);
+        }
+        
+        .catalog-grid-full {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: var(--space-xl);
+        }
+        
+        .load-more-btn {
+            display: block;
+            margin: 40px auto;
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-family: var(--font-body);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+        
+        .load-more-btn:hover {
+            background: var(--accent);
+            color: var(--bg-dark);
+        }
+        
+        /* Skeleton loading */
+        .skeleton-card {
+            background: rgba(255,255,255,0.02);
+            border-radius: var(--radius-md);
+            height: 400px;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+            100% { opacity: 0.5; }
+        }
+        
+        .product-card-inner img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: var(--radius-sm);
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-brand">LAPARET <span style="font-family: var(--font-body); font-weight: 300; letter-spacing: 2px;">PREMIUM</span></div>
+        <div class="nav-links">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="catalog.html" class="active">КАТАЛОГ</a>
+            <a href="#3d">3D ДИЗАЙН</a>
+            <a href="#showroom">ШОУРУМ</a>
+        </div>
+        <button class="nav-cta" onclick="toggleCart()">Корзина (0)</button>
+    </nav>
+
+    <div class="catalog-page-container">
+        <!-- Sidebar -->
+        <aside class="filters-sidebar">
+            <div class="filter-group">
+                <div class="filter-title">Категория</div>
+                <label class="filter-option">
+                    <input type="checkbox" class="filter-checkbox" value="keramogranit" data-filter="category">
+                    <span>Керамогранит</span>
+                </label>
+                <label class="filter-option">
+                    <input type="checkbox" class="filter-checkbox" value="plitka" data-filter="category">
+                    <span>Плитка</span>
+                </label>
+                <label class="filter-option">
+                    <input type="checkbox" class="filter-checkbox" value="laminat" data-filter="category">
+                    <span>Ламинат SPC</span>
+                </label>
+            </div>
+            
+            <div class="filter-group">
+                <div class="filter-title">Дизайн / Фактура</div>
+                <label class="filter-option">
+                    <input type="checkbox" class="filter-checkbox" value="mramor" data-filter="texture">
+                    <span>Мрамор</span>
+                </label>
+                <label class="filter-option">
+                    <input type="checkbox" class="filter-checkbox" value="derevo" data-filter="texture">
+                    <span>Дерево</span>
+                </label>
+                <label class="filter-option">
+                    <input type="checkbox" class="filter-checkbox" value="beton" data-filter="texture">
+                    <span>Бетон</span>
+                </label>
+                <label class="filter-option">
+                    <input type="checkbox" class="filter-checkbox" value="onyx" data-filter="texture">
+                    <span>Оникс</span>
+                </label>
+            </div>
+        
+            <div class="filter-group">
+                <div class="filter-title">Размер</div>
+                <label class="filter-option"><input type="checkbox" class="filter-checkbox" value="60x60" data-filter="size"><span>60x60 см</span></label>
+                <label class="filter-option"><input type="checkbox" class="filter-checkbox" value="120x60" data-filter="size"><span>120x60 см</span></label>
+                <label class="filter-option"><input type="checkbox" class="filter-checkbox" value="80x80" data-filter="size"><span>80x80 см</span></label>
+                <label class="filter-option"><input type="checkbox" class="filter-checkbox" value="20x120" data-filter="size"><span>20x120 см</span></label>
+            </div>
+            <div class="filter-group">
+                <div class="filter-title">Поверхность</div>
+                <label class="filter-option"><input type="checkbox" class="filter-checkbox" value="Матовая" data-filter="surface"><span>Матовая</span></label>
+                <label class="filter-option"><input type="checkbox" class="filter-checkbox" value="Полированная" data-filter="surface"><span>Полированная</span></label>
+                <label class="filter-option"><input type="checkbox" class="filter-checkbox" value="Глянцевая" data-filter="surface"><span>Глянцевая</span></label>
+            </div>
+</aside>
+
+        <!-- Main Content -->
+        <main class="catalog-main">
+            <div class="catalog-header">
+                <h1 class="catalog-title section-title">ПОЛНЫЙ КАТАЛОГ</h1>
+                <div class="catalog-count" id="catalogCount">Загрузка...</div>
+            </div>
+            
+            <div class="catalog-grid-full" id="catalogGridFull">
+                <!-- Skeletons while loading -->
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+            </div>
+            
+            <button class="load-more-btn" id="loadMoreBtn" style="display: none;">Показать еще</button>
+        </main>
+    </div>
+
+    <script>
+        let allProducts = [];
+        let filteredProducts = [];
+        let currentPage = 1;
+        const ITEMS_PER_PAGE = 24;
+        
+        const activeFilters = {
+            category: [],
+            texture: [],
+            size: [],
+            surface: []
+        };
+        
+        async function loadCatalog() {
+            try {
+                const response = await fetch('catalog_full.json');
+                allProducts = await response.json();
+                filteredProducts = [...allProducts];
+                
+                document.getElementById('catalogCount').innerText = `${allProducts.length} позиций`;
+                renderCatalogPage();
+                
+            } catch (e) {
+                console.error("Ошибка загрузки каталога", e);
+                document.getElementById('catalogGridFull').innerHTML = '<p>Скрапер еще собирает данные. Пожалуйста, обновите страницу через пару минут.</p>';
+            }
+        }
+        
+        function renderCatalogPage(append = false) {
+            const grid = document.getElementById('catalogGridFull');
+            const btn = document.getElementById('loadMoreBtn');
+            
+            if (!append) grid.innerHTML = '';
+            
+            const start = (currentPage - 1) * ITEMS_PER_PAGE;
+            const end = start + ITEMS_PER_PAGE;
+            const itemsToShow = filteredProducts.slice(start, end);
+            
+            itemsToShow.forEach(item => {
+                const imgUrl = (item.images && item.images.length > 0) ? item.images[0] : 'assets/images/hero_tile_bg_1784936174808.jpg';
+                const div = document.createElement('div');
+                div.className = 'product-card bento-card';
+                div.innerHTML = `
+                    <a href="product.html?id=${item.id}" style="text-decoration: none; color: inherit;">
+                    <div class="product-card-inner" style="transition: transform 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <img src="${imgUrl}" alt="${item.name}" loading="lazy" onerror="this.src='assets/images/hero_tile_bg_1784936174808.jpg'" style="transition: transform 0.5s;">
+                        <h3 style="margin-top: 15px; margin-bottom: 5px;">${item.name}</h3>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 10px;">${item.size || ''} • ${item.surface || ''}</div>
+                        <p class="product-price" style="font-size: 1.2rem; color: var(--accent); font-weight: bold;">от ${item.price || item.pricePerM2 || 2500} ₽/м²</p>
+                    </div>
+                    </a>
+                `;
+                grid.appendChild(div);
+            });
+            
+            if (end < filteredProducts.length) {
+                btn.style.display = 'block';
+            } else {
+                btn.style.display = 'none';
+            }
+            
+            document.getElementById('catalogCount').innerText = `${filteredProducts.length} позиций`;
+        }
+        
+        function applyFilters() {
+            filteredProducts = allProducts.filter(item => {
+
+                // Mock attributes for filtering
+                const SURFACES = ['Матовая', 'Полированная', 'Глянцевая', 'Лаппатированная'];
+                const SIZES = ['60x60', '120x60', '80x80', '20x120'];
+                let hash = 0; for (let i = 0; i < item.id.length; i++) hash = item.id.charCodeAt(i) + ((hash << 5) - hash); hash = Math.abs(hash);
+                item.surface = SURFACES[hash % SURFACES.length];
+                item.size = SIZES[hash % SIZES.length];
+                item.price = 2000 + (hash % 60) * 100;
+
+                const catMatch = activeFilters.category.length === 0 || activeFilters.category.includes(item.category);
+                const texMatch = activeFilters.texture.length === 0 || activeFilters.texture.includes(item.texture);
+                const sizeMatch = activeFilters.size.length === 0 || activeFilters.size.includes(item.size);
+                const surMatch = activeFilters.surface.length === 0 || activeFilters.surface.includes(item.surface);
+                
+                return catMatch && texMatch && sizeMatch && surMatch;
+            });
+            currentPage = 1;
+            renderCatalogPage();
+        }
+        
+        // Event listeners
+        document.querySelectorAll('.filter-checkbox').forEach(cb => {
+            cb.addEventListener('change', (e) => {
+                const filterType = e.target.dataset.filter;
+                const val = e.target.value;
+                if (e.target.checked) {
+                    activeFilters[filterType].push(val);
+                } else {
+                    activeFilters[filterType] = activeFilters[filterType].filter(v => v !== val);
+                }
+                applyFilters();
+            });
+        });
+        
+        document.getElementById('loadMoreBtn').addEventListener('click', () => {
+            currentPage++;
+            renderCatalogPage(true);
+        });
+        
+        document.addEventListener('DOMContentLoaded', loadCatalog);
+    </script>
+</body>
+</html>
